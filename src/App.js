@@ -9,13 +9,17 @@ function slowFunction(num) {
 export default function App() {
   const [number, setNumber] = useState(0)
   const [dark, setDark] = useState(false)
+
   const doubleNumber = useMemo(() => {
     return slowFunction(number)
   }, [number])
-  const themeStyles = {
-    background: dark ? 'black' : 'white',
-    color: dark ? 'white' : 'black'
-  }
+
+  const themeStyles = useMemo(() => {
+    return {
+      background: dark ? 'black' : 'white',
+      color: dark ? 'white' : 'black'
+    }
+  }, [dark])
 
   useEffect(() => {
     console.log('Theme Changed')
