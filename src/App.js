@@ -1,8 +1,8 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 
 function slowFunction(num) {
   console.log('Calling Slow Function')
-  for (let i = 0; i < 1000000000; i++) {}
+  for (let i = 0; i < 10000000; i++) {}
   return num*2
 }
 
@@ -16,6 +16,10 @@ export default function App() {
     background: dark ? 'black' : 'white',
     color: dark ? 'white' : 'black'
   }
+
+  useEffect(() => {
+    console.log('Theme Changed')
+  }, [themeStyles])
 
   return (
     <>
