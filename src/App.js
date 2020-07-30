@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 
 function slowFunction(num) {
   console.log('Calling Slow Function')
@@ -9,7 +9,9 @@ function slowFunction(num) {
 export default function App() {
   const [number, setNumber] = useState(0)
   const [dark, setDark] = useState(false)
-  const doubleNumber = slowFunction(number)
+  const doubleNumber = useMemo(() => {
+    return slowFunction(number)
+  }, [number])
   const themeStyles = {
     background: dark ? 'black' : 'white',
     color: dark ? 'white' : 'black'
