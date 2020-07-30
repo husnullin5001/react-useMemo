@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+function slowFunction(num) {
+  console.log('Calling Slow Function')
+  for (let i = 0; i < 1000000000; i++) {}
+  return num*2
 }
 
-export default App;
+export default function App() {
+  const [number, setNumber] = useState(0)
+  const [dark, setDark] = useState(false)
+  const doubleNumber = slowFunction(number)
+  const themeStyles = {
+    background: dark ? 'black' : 'white',
+    color: dark ? 'white' : 'black'
+  }
+
+  return (
+    <>
+      <input type="number" value={number} onChange={e => setNumber(parseInt(e.target.value, 10))} />
+      <button onClick={() => setDark(prevDark => !prevDark)}>Change Theme</button>
+      <div style={themeStyles}>{doubleNumber}</div>
+    </>
+  )
+}
